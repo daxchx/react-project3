@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-interface ItemProps {
+type ItemProps = {
   value: string | number;
   label: string;
-  onChange: any;
-}
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 function Item({ value, label, onChange }: ItemProps) {
   return (
@@ -35,29 +35,28 @@ export default function App() {
 
   const [result, setResult] = useState("");
 
-  function handleDecimal(e: any) {
+  function handleDecimal(e: React.ChangeEvent<HTMLInputElement>) {
     let target = +e.target.value;
     setDecimal(target ? target : "");
     setBinary(target ? target.toString(2) : "");
     setHexadecimal(target ? target.toString(16) : "");
-    setResult("10進数 - " + target.toString());
+    setResult(target.toString());
   }
 
-  function handleBinary(e: any) {
+  function handleBinary(e: React.ChangeEvent<HTMLInputElement>) {
     let target = e.target.value;
     setDecimal(parseInt(target, 2) ? parseInt(target, 2) : "");
     setBinary(parseInt(target, 2) ? target : "");
     setHexadecimal(parseInt(target, 2) ? parseInt(target, 2).toString(16) : "");
-    setResult("2進数 - " + target);
-    console.log(parseInt("1000222", 2));
+    setResult(target);
   }
 
-  function handleHexadecimal(e: any) {
+  function handleHexadecimal(e: React.ChangeEvent<HTMLInputElement>) {
     let target = e.target.value;
     setDecimal(parseInt(target, 16) ? parseInt(target, 16) : "");
     setBinary(parseInt(target, 16) ? parseInt(target, 16).toString(2) : "");
     setHexadecimal(target != "" ? target : "");
-    setResult("16進数 - " + target);
+    setResult(target);
   }
 
   return (
